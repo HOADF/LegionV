@@ -1,0 +1,243 @@
+/* Основные стили страницы */
+body {
+    font-family: Arial, sans-serif; /* Основной шрифт */
+    background-color: black; /* Цвет фона (запасной вариант) */
+    background: url("/background.jpg") no-repeat; /* Фоновое изображение */
+    background-attachment: fixed; /* Фиксированный фон */
+    background-color: #1a1a1a; /* Альтернативный цвет фона */
+    color: white; /* Цвет текста */
+    margin: 0; /* Сброс внешних отступов */
+    padding: 0; /* Сброс внутренних отступов */
+    line-height: 1.6; /* Межстрочное расстояние */
+}
+
+/* Основной контейнер содержимого */
+.layer {
+    max-width: 1200px; /* Максимальная ширина на десктопе */
+    margin: 0 auto; /* Центрирование по горизонтали */
+    padding: 30px; /* Внутренние отступы */
+    background-color: rgba(0, 0, 0, 0.85); /* Полупрозрачный черный фон */
+    border-radius: 10px; /* Закругленные углы */
+    box-shadow: 0 0 20px rgba(32, 189, 125, 0.4); /* Тень с зеленым оттенком */
+    border: 1px solid #333; /* Граница контейнера */
+    text-align: center; /* Выравнивание текста по центру */
+}
+
+/* Стили заголовков */
+#heading {
+    color: #20bd7d; /* Зеленый цвет */
+    margin-top: 1.5em; /* Отступ сверху */
+}
+
+#title {
+    border-radius: 19px; /* Закругление углов */
+    font-weight: bold; /* Жирное начертание */
+    text-align: center; /* Выравнивание по центру */
+    color: green; /* Цвет текста */
+    border: 2px solid blue; /* Синяя рамка */
+}
+
+/* Стили для изображений с эффектом зума */
+.image-wrapper {
+    width: 100%; /* Ширина по родителю */
+    max-width: 600px; /* Максимальная ширина */
+    margin: 0cm auto; /* Центрирование с отступами */
+    position: relative; /* Относительное позиционирование */
+    cursor: zoom-in; /* Курсор при наведении */
+}
+
+.zoom-img {
+    transition: transform 0.3s ease; /* Плавное увеличение */
+    height: auto; /* Автоматическая высота */
+    width: 100%; /* Ширина по контейнеру */
+    max-width: 600px; /* Максимальная ширина */
+}
+
+.zoom-img:hover {
+    transform: scale(1.5); /* Увеличение при наведении */
+}
+
+/* Шапка сайта */
+header {
+    text-align: center; /* Выравнивание по центру */
+    margin-bottom: 20px; /* Отступ снизу */
+}
+
+h1 {
+    font-size: 1.8rem; /* Размер шрифта */
+    margin: 0.5em 0; /* Внешние отступы */
+}
+
+.welcome-message {
+    font-size: 1.2rem; /* Размер шрифта */
+    margin: 0.5em 0; /* Внешние отступы */
+}
+
+/* Блок "В разработке" */
+.repair-notice {
+    display: flex; /* Гибкий контейнер */
+    justify-content: center; /* Выравнивание по центру */
+    align-items: center; /* Выравнивание по вертикали */
+    gap: 15px; /* Расстояние между элементами */
+    margin: 20px 0; /* Внешние отступы */
+    padding: 10px; /* Внутренние отступы */
+    border-radius: 5px; /* Закругление углов */
+}
+
+/* Меню разделов */
+.menu-heading {
+    text-align: center; /* Выравнивание по центру */
+    margin: 20px 0; /* Внешние отступы */
+}
+
+.menu-grid {
+    display: flex; /* Гибкий контейнер */
+    flex-wrap: wrap; /* Перенос на новую строку */
+    justify-content: space-evenly; /* Равномерное распределение */
+    gap: 20px; /* Расстояние между элементами */
+    margin: 0 auto; /* Центрирование */
+    padding: 20px; /* Внутренние отступы */
+    background-color: rgba(182, 183, 170, 0.2); /* Цвет фона */
+    border: 2px solid #20bd7d; /* Граница */
+    border-radius: 7px; /* Закругление углов */
+    max-width: 900px; /* Максимальная ширина */
+}
+
+/* Элементы меню */
+.menu-item {
+    text-align: center; /* Выравнивание по центру */
+}
+
+.menu-item p {
+    margin: 0.5em 0; /* Внешние отступы */
+}
+
+/* Обложки */
+.cover {
+    border: 1px solid #20bd7d; /* Граница */
+    border-radius: 5px; /* Закругление углов */
+    transition: transform 0.3s; /* Плавное изменение */
+}
+
+.cover:hover {
+    transform: scale(1.05); /* Увеличение при наведении */
+}
+
+/* Прогресс-бар */
+.progress-container {
+    text-align: center; /* Выравнивание по центру */
+    margin: 30px 0; /* Внешние отступы */
+}
+
+progress {
+    width: 80%; /* Ширина */
+    height: 20px; /* Высота */
+    border: 1px solid #20bd7d; /* Граница */
+    border-radius: 5px; /* Закругление углов */
+}
+
+/* Стилизация прогресс-бара */
+progress::-webkit-progress-bar {
+    background-color: #333; /* Цвет фона */
+}
+
+progress::-webkit-progress-value {
+    background-color: #20bd7d; /* Цвет заполнения */
+}
+
+/* Ссылка на почту */
+.email-link {
+    display: block; /* Блочный элемент */
+    text-align: center; /* Выравнивание по центру */
+    margin: 20px 0; /* Внешние отступы */
+}
+
+.email-image {
+    width: 200px; /* Ширина */
+    transition: all 0.3s ease; /* Плавные изменения */
+    cursor: pointer; /* Курсор-указатель */
+}
+  
+.email-image:hover {
+    opacity: 0.8; /* Полупрозрачность */
+    transform: scale(1.2); /* Увеличение */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.51); /* Тень */
+} 
+
+/* Специальное примечание */
+#Note {
+    color: blue; /* Цвет текста */
+}
+
+/* Подвал сайта */
+footer {
+    text-align: center; /* Выравнивание по центру */
+    margin-top: 30px; /* Отступ сверху */
+    padding: 10px; /* Внутренние отступы */
+    font-size: 0.9rem; /* Размер шрифта */
+    color: #b6b7aa; /* Цвет текста */
+}
+
+/* Медиазапросы для мобильных устройств */
+@media (max-width: 768px) {
+    /* Уменьшаем отступы и максимальную ширину */
+    .layer {
+        padding: 15px;
+        margin: 10px;
+        max-width: 95%;
+    }
+    
+    /* Делаем изображения адаптивными */
+    .zoom-img {
+        max-width: 100%;
+        height: auto;
+    }
+    
+    /* Меняем направление меню на вертикальное */
+    .menu-grid {
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    /* Уменьшаем кнопку email */
+    .email-image {
+        width: 150px;
+    }
+    
+    /* Уменьшаем размер шрифта заголовков */
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    .welcome-message {
+        font-size: 1rem;
+    }
+    
+    /* Уменьшаем размер текста в подвале */
+    footer {
+        font-size: 0.8rem;
+    }
+    
+    /* Отключаем hover-эффекты на мобильных */
+    .cover:hover, .email-image:hover {
+        transform: none;
+        box-shadow: none;
+    }
+    
+    /* Уменьшаем размер прогресс-бара */
+    progress {
+        width: 90%;
+        height: 15px;
+    }
+    
+    /* Уменьшаем размер блоков с ремонтом */
+    .repair-notice img {
+        height: 40px;
+        width: 40px;
+    }
+    
+    /* Уменьшаем размер заголовков разделов */
+    #heading, #title {
+        font-size: 1.2rem;
+    }
+}
