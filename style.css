@@ -2,7 +2,7 @@
 body {
     font-family: Arial, sans-serif; /* Основной шрифт */
     background-color: black; /* Цвет фона (запасной вариант) */
-    background: url("/background.jpg") no-repeat; /* Фоновое изображение */
+    background: url("images/background.jpg") no-repeat; /* Фоновое изображение */
     background-attachment: fixed; /* Фиксированный фон */
     background-color: #1a1a1a; /* Альтернативный цвет фона */
     color: white; /* Цвет текста */
