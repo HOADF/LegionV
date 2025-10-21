@@ -74,7 +74,7 @@ h1 {
 }
 
 /* Блок "В разработке" */
-.repair-notice {
+.corp-notice {
     display: flex; /* Гибкий контейнер */
     justify-content: center; /* Выравнивание по центру */
     align-items: center; /* Выравнивание по вертикали */
