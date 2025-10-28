@@ -1,11 +1,10 @@
-// zoom.js — простое увеличение картинки по тапу (с возможностью масштабирования пальцами)
-
 document.addEventListener("DOMContentLoaded", () => {
-  const images = document.querySelectorAll(".project img");
+  // Находим все изображения с классом zoom-img
+  const images = document.querySelectorAll(".zoom-img");
 
   images.forEach(img => {
     img.addEventListener("click", () => {
-      // создаём затемнение поверх страницы
+      // создаём затемнённый фон (оверлей)
       const overlay = document.createElement("div");
       overlay.style.cssText = `
         position: fixed;
@@ -23,22 +22,24 @@ document.addEventListener("DOMContentLoaded", () => {
       fullImg.src = img.src;
       fullImg.style.maxWidth = "100%";
       fullImg.style.maxHeight = "100%";
-      fullImg.style.cursor = "zoom-out";
-      fullImg.style.touchAction = "none"; // чтобы можно было масштабировать и двигать пальцами
-
-      // вставляем изображение в оверлей
+      fullImg.style.cursor = "grab";
+      fullImg.style.touchAction = "none"; // важно для pinch-zoom
       overlay.appendChild(fullImg);
       document.body.appendChild(overlay);
 
-      // подключаем Panzoom (если есть)
-      if (window.Panzoom) {
-        const panzoom = Panzoom(fullImg, { contain: 'outside', maxScale: 4 });
-        // отключаем клики внутри изображения (чтобы не закрывалось)
-        fullImg.addEventListener("click", e => e.stopPropagation());
-      }
+      // активируем Panzoom
+      const panzoom = Panzoom(fullImg, {
+        maxScale: 4, // можно увеличить до 5–6, если хочешь
+        contain: "outside"
+      });
 
-      // закрытие по тапу на фоне
-      overlay.addEventListener("click", () => overlay.remove());
+      // двойной тап — сброс масштаба
+      fullImg.addEventListener("dblclick", () => panzoom.reset());
+
+      // тап по фону — закрыть
+      overlay.addEventListener("click", e => {
+        if (e.target === overlay) overlay.remove();
+      });
     });
   });
 });
