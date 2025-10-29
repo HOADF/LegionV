@@ -257,3 +257,11 @@ footer {
   .project h2 { font-size: 1.3rem; }
 }
 
+/* Позволяет зумить и двигать картинку на мобильных */
+.zoom-img {
+  cursor: pointer;          /* Делает картинку кликабельной */
+  touch-action: manipulation; /* Разрешает жесты */
+  -webkit-user-drag: none;  /* Отключает перетаскивание */
+  user-select: none;        /* Отключает выделение */
+}
+
