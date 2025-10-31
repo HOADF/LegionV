@@ -275,3 +275,21 @@ footer {
 body.modal-open {
   overflow: hidden;
 }
+
+/* Центрирование увеличенного изображения */
+body.modal-open {
+  overflow: hidden;
+}
+
+.zoom-overlay,
+.panzoom {
+  touch-action: none;
+}
+
+.zoom-overlay img {
+  object-fit: contain;
+  transform-origin: center center;
+  display: block;
+  margin: auto;
+}
+
