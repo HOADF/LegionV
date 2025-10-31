@@ -293,3 +293,7 @@ body.modal-open {
   margin: auto;
 }
 
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
