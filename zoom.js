@@ -83,25 +83,30 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-// двойной тап — либо сброс зума, либо закрытие
+// двойной тап — сброс масштаба и закрытие
 let lastTap = 0;
-fullImg.addEventListener('touchend', e => {
+fullImg.addEventListener("touchend", e => {
   const now = Date.now();
   const tapInterval = now - lastTap;
 
   if (tapInterval < 300) {
-    // узнаём текущий масштаб
     const currentScale = panzoom.getScale ? panzoom.getScale() : 1;
 
     if (currentScale > 1.2) {
-      // если увеличено — сбрасываем
+      // Сначала сброс масштаба
       panzoom.reset();
+
+      // Немного подождём, чтобы анимация успела выполниться, и потом закроем
+      setTimeout(() => {
+        overlay.remove();
+        document.body.classList.remove("modal-open");
+      }, 200);
     } else {
-      // если нет — закрываем
+      // Если уже обычный размер — сразу закрываем
       overlay.remove();
-      document.body.classList.remove('modal-open');
+      document.body.classList.remove("modal-open");
     }
   }
+
   lastTap = now;
 });
-
