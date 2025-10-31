@@ -82,3 +82,25 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+
+// двойной тап для сброса или закрытия
+let lastTap = 0;
+fullImg.addEventListener("touchend", e => {
+  const now = Date.now();
+  const tapInterval = now - lastTap;
+
+  if (tapInterval < 300) {
+    // Если текущее увеличение больше 1.2 — сбрасываем (уменьшаем)
+    const currentScale = panzoom.getScale ? panzoom.getScale() : 1;
+    if (currentScale > 1.2) {
+      panzoom.reset();
+    } else {
+      // Иначе — двойной тап просто закрывает изображение
+      overlay.remove();
+      document.body.classList.remove("modal-open");
+    }
+  }
+
+  lastTap = now;
+});
+
