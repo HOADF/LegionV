@@ -265,3 +265,13 @@ footer {
   user-select: none;        /* Отключает выделение */
 }
 
+/* Стиль увеличенного изображения */
+.panzoom img, .zoom-overlay img {
+  transform-origin: center center;
+  object-fit: contain;
+}
+
+/* Исправляет “приклеивание к низу” при открытии */
+body.modal-open {
+  overflow: hidden;
+}
