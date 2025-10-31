@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Проверяем: если ширина экрана меньше 900px, активируем зум
   if (window.innerWidth < 900) {
     const images = document.querySelectorAll(".zoom-img");
 
@@ -21,23 +20,40 @@ document.addEventListener("DOMContentLoaded", () => {
         // Создаём увеличенное изображение
         const fullImg = document.createElement("img");
         fullImg.src = img.src;
-        fullImg.style.maxWidth = "100%";
-        fullImg.style.maxHeight = "100%";
-        fullImg.style.cursor = "grab";
-        fullImg.style.touchAction = "none"; // важно для pinch-zoom
+        fullImg.style.cssText = `
+          max-width: 90%;
+          max-height: 90%;
+          cursor: grab;
+          touch-action: none;
+          transition: transform 0.3s ease;
+        `;
+
         overlay.appendChild(fullImg);
         document.body.appendChild(overlay);
 
-        // Активируем Panzoom — поддержка масштабирования и перемещения пальцами
+        // Инициализация Panzoom с поддержкой pinch, scroll, move
         const panzoom = Panzoom(fullImg, {
-          maxScale: 4, // максимальный зум
-          contain: "outside"
+          maxScale: 5,
+          contain: 'outside',
+          pinchSpeed: 1,       // чувствительность масштабирования
+          panOnlyWhenZoomed: false
         });
 
-        // Двойной тап (или двойной клик) — сброс масштаба
-        fullImg.addEventListener("dblclick", () => panzoom.reset());
+        // Разрешаем жесты пальцами
+        fullImg.parentElement.addEventListener('wheel', panzoom.zoomWithWheel);
+        fullImg.parentElement.addEventListener('touchstart', e => e.stopPropagation(), { passive: true });
 
-        // Тап по фону — закрыть просмотр
+        // Сброс масштаба по двойному тапу
+        let lastTap = 0;
+        fullImg.addEventListener("touchend", e => {
+          const now = new Date().getTime();
+          if (now - lastTap < 300) {
+            panzoom.reset();
+          }
+          lastTap = now;
+        });
+
+        // Закрытие по тапу на фон
         overlay.addEventListener("click", e => {
           if (e.target === overlay) overlay.remove();
         });
