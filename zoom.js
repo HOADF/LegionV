@@ -90,23 +90,43 @@ fullImg.addEventListener("touchend", e => {
   const tapInterval = now - lastTap;
 
   if (tapInterval < 300) {
-    const currentScale = panzoom.getScale ? panzoom.getScale() : 1;
+    const scale = panzoom.getScale ? panzoom.getScale() : 1;
 
-    if (currentScale > 1.2) {
-      // Сначала сброс масштаба
-      panzoom.reset();
-
-      // Немного подождём, чтобы анимация успела выполниться, и потом закроем
+    if (scale > 1.05) {
+      // Если увеличено — плавно сбрасываем и закрываем
+      panzoom.reset({ animate: true });
+      setTimeout(() => {
+        overlay.classList.add("fade-out");
+        setTimeout(() => {
+          overlay.remove();
+          document.body.classList.remove("modal-open");
+        }, 250);
+      }, 200);
+    } else {
+      // Если уже нормальный размер — просто закрываем
+      overlay.classList.add("fade-out");
       setTimeout(() => {
         overlay.remove();
         document.body.classList.remove("modal-open");
-      }, 200);
-    } else {
-      // Если уже обычный размер — сразу закрываем
-      overlay.remove();
-      document.body.classList.remove("modal-open");
+      }, 250);
     }
   }
 
   lastTap = now;
 });
+
+// закрытие по тапу мимо изображения
+overlay.addEventListener("click", e => {
+  if (e.target === overlay) {
+    overlay.classList.add("fade-out");
+    setTimeout(() => {
+      overlay.remove();
+      document.body.classList.remove("modal-open");
+    }, 250);
+  }
+});
+
+// не сбрасывать положение при pinch-zoom
+fullImg.addEventListener("wheel", panzoom.zoomWithWheel);
+wrapper.addEventListener("touchmove", e => e.stopPropagation(), { passive: false });
+wrapper.addEventListener("touchend", e => e.stopPropagation());
