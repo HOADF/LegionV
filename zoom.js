@@ -1,16 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
-  // Активируем только на мобильных
-  if (window.innerWidth < 900) {
+  if (window.innerWidth < 1024) {
     const images = document.querySelectorAll(".zoom-img");
 
     images.forEach(img => {
       img.addEventListener("click", () => {
-        // Создаём оверлей
+        // создаём затемнённый фон
         const overlay = document.createElement("div");
         overlay.style.cssText = `
           position: fixed;
           inset: 0;
-          background: rgba(0, 0, 0, 0.92);
+          background: rgba(0,0,0,0.95);
           display: flex;
           justify-content: center;
           align-items: center;
@@ -18,8 +17,23 @@ document.addEventListener("DOMContentLoaded", () => {
           touch-action: none;
           overflow: hidden;
         `;
+        document.body.appendChild(overlay);
+        document.body.classList.add("modal-open");
 
-        // Картинка
+        // создаём контейнер Panzoom
+        const wrapper = document.createElement("div");
+        wrapper.style.cssText = `
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          overflow: hidden;
+          touch-action: none;
+        `;
+        overlay.appendChild(wrapper);
+
+        // создаём изображение
         const fullImg = document.createElement("img");
         fullImg.src = img.src;
         fullImg.style.cssText = `
@@ -27,72 +41,43 @@ document.addEventListener("DOMContentLoaded", () => {
           max-height: 100%;
           object-fit: contain;
           cursor: grab;
+          user-select: none;
           touch-action: none;
-          transform-origin: center center;
-          transition: transform 0.25s ease;
+          transition: transform 0.2s ease;
         `;
+        wrapper.appendChild(fullImg);
 
-        overlay.appendChild(fullImg);
-        document.body.appendChild(overlay);
-        document.body.classList.add("modal-open");
-
-        // Инициализация Panzoom
+        // инициализируем Panzoom
         const panzoom = Panzoom(fullImg, {
-          contain: 'outside',
           maxScale: 6,
+          contain: 'none',       // полная свобода перемещения
           startScale: 1,
-          pinchSpeed: 1.5,
-          step: 0.25,
-          panOnlyWhenZoomed: false,
+          startX: 0,
+          startY: 0
         });
 
-        // Поддержка масштабирования колесом мыши и pinch на телефоне
-        overlay.addEventListener('wheel', panzoom.zoomWithWheel);
-        overlay.addEventListener('gesturestart', e => e.preventDefault());
+        // подключаем жесты
+        wrapper.addEventListener('wheel', panzoom.zoomWithWheel);
+        wrapper.addEventListener('pointerdown', e => e.stopPropagation());
+        wrapper.addEventListener('touchmove', e => e.preventDefault(), { passive: false });
 
-        // === Двойной тап (сброс масштаба) ===
+        // двойной тап для сброса
         let lastTap = 0;
-        fullImg.addEventListener('touchend', e => {
-          const now = new Date().getTime();
+        fullImg.addEventListener("touchend", e => {
+          const now = Date.now();
           if (now - lastTap < 300) {
             panzoom.reset();
           }
           lastTap = now;
         });
 
-        // === Закрытие по тапу на фон ===
-        overlay.addEventListener('click', e => {
+        // тап по фону — закрытие
+        overlay.addEventListener("click", e => {
           if (e.target === overlay) {
             overlay.remove();
             document.body.classList.remove("modal-open");
           }
         });
-
-        // === Разрешаем перетаскивание одним пальцем ===
-        let isDragging = false;
-        let startX = 0;
-        let startY = 0;
-
-        fullImg.addEventListener("touchstart", e => {
-          if (e.touches.length === 1) {
-            isDragging = true;
-            startX = e.touches[0].clientX;
-            startY = e.touches[0].clientY;
-          }
-        });
-
-        fullImg.addEventListener("touchmove", e => {
-          if (isDragging && e.touches.length === 1) {
-            e.preventDefault();
-            const dx = e.touches[0].clientX - startX;
-            const dy = e.touches[0].clientY - startY;
-            panzoom.pan(dx, dy);
-            startX = e.touches[0].clientX;
-            startY = e.touches[0].clientY;
-          }
-        });
-
-        fullImg.addEventListener("touchend", () => (isDragging = false));
       });
     });
   }
