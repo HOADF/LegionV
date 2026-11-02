@@ -1,4 +1,4 @@
-#Infinite Lagrange Guide
+# Infinite Lagrange Guide
 
 Информационный сайт по игре *Infinite Lagrange*.  
 Проект создан для демонстрации адаптивной вёрстки, интерфейса в тематике sci-fi и организации игрового контента.
