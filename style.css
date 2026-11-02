@@ -57,6 +57,37 @@ body {
     transform: scale(1.5); /* Увеличение при наведении */
 }
 
+/* Навигация между страницами сайта */
+.site-nav {
+    display: flex; /* Гибкий контейнер */
+    flex-wrap: wrap; /* Перенос на новую строку на мобильных */
+    justify-content: center; /* Выравнивание по центру */
+    gap: 10px; /* Расстояние между ссылками */
+    margin: 0 0 20px 0; /* Отступ снизу */
+    padding-bottom: 15px; /* Внутренний отступ снизу */
+    border-bottom: 1px solid #20bd7d; /* Разделительная линия */
+}
+
+.site-nav a {
+    color: #20bd7d; /* Зелёный цвет ссылок */
+    text-decoration: none; /* Без подчёркивания */
+    font-weight: bold; /* Жирное начертание */
+    padding: 5px 12px; /* Внутренние отступы */
+    border-radius: 5px; /* Закругление углов */
+    border: 1px solid transparent; /* Место под рамку при наведении */
+    transition: background-color 0.2s, border-color 0.2s; /* Плавные переходы */
+}
+
+.site-nav a:hover {
+    background-color: rgba(32, 189, 125, 0.15); /* Подсветка при наведении */
+    border-color: #20bd7d; /* Рамка при наведении */
+}
+
+.site-nav a.active {
+    background-color: #20bd7d; /* Заливка активного пункта */
+    color: #1a1a1a; /* Тёмный текст на зелёном */
+}
+
 /* Шапка сайта */
 header {
     text-align: center; /* Выравнивание по центру */
