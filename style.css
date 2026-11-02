@@ -73,17 +73,6 @@ h1 {
     margin: 0.5em 0; /* Внешние отступы */
 }
 
-/* Блок "В разработке" */
-.corp-notice {
-    display: flex; /* Гибкий контейнер */
-    justify-content: center; /* Выравнивание по центру */
-    align-items: center; /* Выравнивание по вертикали */
-    gap: 15px; /* Расстояние между элементами */
-    margin: 20px 0; /* Внешние отступы */
-    padding: 10px; /* Внутренние отступы */
-    border-radius: 5px; /* Закругление углов */
-}
-
 /* Меню разделов */
 .menu-heading {
     text-align: center; /* Выравнивание по центру */
@@ -121,28 +110,6 @@ h1 {
 
 .cover:hover {
     transform: scale(1.05); /* Увеличение при наведении */
-}
-
-/* Прогресс-бар */
-.progress-container {
-    text-align: center; /* Выравнивание по центру */
-    margin: 30px 0; /* Внешние отступы */
-}
-
-progress {
-    width: 80%; /* Ширина */
-    height: 20px; /* Высота */
-    border: 1px solid #20bd7d; /* Граница */
-    border-radius: 5px; /* Закругление углов */
-}
-
-/* Стилизация прогресс-бара */
-progress::-webkit-progress-bar {
-    background-color: #333; /* Цвет фона */
-}
-
-progress::-webkit-progress-value {
-    background-color: #20bd7d; /* Цвет заполнения */
 }
 
 /* Ссылка на почту */
@@ -222,12 +189,6 @@ footer {
     .cover:hover, .email-image:hover {
         transform: none;
         box-shadow: none;
-    }
-    
-    /* Уменьшаем размер прогресс-бара */
-    progress {
-        width: 90%;
-        height: 15px;
     }
     
     /* Уменьшаем размер блоков с ремонтом */
