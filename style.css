@@ -176,6 +176,15 @@ footer {
     color: #b6b7aa; /* Цвет текста */
 }
 
+footer a {
+    color: #20bd7d; /* Зелёный цвет ссылки на автора */
+    text-decoration: none; /* Без подчёркивания */
+}
+
+footer a:hover {
+    text-decoration: underline; /* Подчёркивание при наведении */
+}
+
 /* Медиазапросы для мобильных устройств */
 @media (max-width: 768px) {
     /* Уменьшаем отступы и максимальную ширину */
